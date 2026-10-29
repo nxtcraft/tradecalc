@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profit & Loss Calculator — Stock Trade P&L | TradeCalc</title>
+  <meta name="description" content="Calculate profit or loss on a stock trade. Enter buy price, sell price and quantity to get gross P&L, P&L %, and breakeven price.">
+  <link rel="canonical" href="https://tradecalc.in/profit-loss/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">📊 Profit & Loss Calculator</h1>
+  <p class="calc-desc">Calculate the profit or loss on any buy/sell trade in seconds.</p>
+
+  <div class="field">
+    <label>Buy Price (₹)</label>
+    <input type="number" id="buy" placeholder="e.g. 1200" step="0.01" min="0">
+  </div>
+  <div class="field">
+    <label>Sell Price (₹)</label>
+    <input type="number" id="sell" placeholder="e.g. 1350" step="0.01" min="0">
+  </div>
+  <div class="field">
+    <label>Quantity</label>
+    <input type="number" id="qty" placeholder="e.g. 50" min="1">
+  </div>
+  <div class="field">
+    <label>Brokerage & Charges (₹) — optional</label>
+    <input type="number" id="charges" placeholder="e.g. 50" min="0" step="0.01" value="0">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate P&L</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Net Profit / Loss</div>
+      <div class="value" id="r_net">—</div>
+    </div>
+    <div class="result-row"><span class="result-label">Buy Value</span><span class="result-value" id="r_buy_val">—</span></div>
+    <div class="result-row"><span class="result-label">Sell Value</span><span class="result-value" id="r_sell_val">—</span></div>
+    <div class="result-row"><span class="result-label">Gross P&L</span><span class="result-value" id="r_gross">—</span></div>
+    <div class="result-row"><span class="result-label">P&L %</span><span class="result-value" id="r_pct">—</span></div>
+    <div class="result-row"><span class="result-label">Per Share P&L</span><span class="result-value" id="r_per_share">—</span></div>
+  </div>
+
+  <div class="tips">
+    <h3>How it works</h3>
+    <ul>
+      <li>Gross P&L = (Sell Price − Buy Price) × Quantity</li>
+      <li>Net P&L = Gross P&L − Charges</li>
+      <li>P&L % = Net P&L ÷ Buy Value × 100</li>
+      <li>Add charges from the Brokerage Calculator for accuracy</li>
+    </ul>
+  </div>
+  <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
+</div>
+</div>
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+function calculate() {
+  const buy = parseFloat(document.getElementById('buy').value);
+  const sell = parseFloat(document.getElementById('sell').value);
+  const qty = parseFloat(document.getElementById('qty').value);
+  const charges = parseFloat(document.getElementById('charges').value) || 0;
+  if ([buy, sell, qty].some(isNaN)) { alert('Fill all required fields.'); return; }
+
+  const buyVal = buy * qty;
+  const sellVal = sell * qty;
+  const gross = (sell - buy) * qty;
+  const net = gross - charges;
+  const pct = (net / buyVal * 100).toFixed(2);
+  const color = net >= 0 ? 'green' : 'red';
+  const fmt = n => '₹' + Math.abs(n).toLocaleString('en-IN', {maximumFractionDigits:2});
+
+  document.getElementById('r_buy_val').textContent = fmt(buyVal);
+  document.getElementById('r_sell_val').textContent = fmt(sellVal);
+  document.getElementById('r_gross').textContent = (gross >= 0 ? '+' : '-') + fmt(gross);
+  document.getElementById('r_gross').className = 'result-value ' + (gross >= 0 ? 'green' : 'red');
+  document.getElementById('r_pct').textContent = (net >= 0 ? '+' : '') + pct + '%';
+  document.getElementById('r_pct').className = 'result-value ' + color;
+  document.getElementById('r_per_share').textContent = (net >= 0 ? '+' : '-') + fmt(Math.abs(net / qty));
+  document.getElementById('r_net').textContent = (net >= 0 ? '+' : '-') + fmt(Math.abs(net));
+  document.getElementById('r_net').style.color = net >= 0 ? 'var(--accent2)' : 'var(--danger)';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

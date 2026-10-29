@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIP Calculator — Mutual Fund SIP Returns India | TradeCalc</title>
+  <meta name="description" content="Free SIP calculator for India. Calculate your mutual fund SIP corpus, total investment and estimated returns based on monthly investment and expected rate.">
+  <link rel="canonical" href="https://tradecalc.in/sip/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">💰 SIP Calculator</h1>
+  <p class="calc-desc">Calculate how much corpus your monthly SIP will build over time. Based on the standard SIP formula used by all Indian mutual fund calculators.</p>
+
+  <div class="field">
+    <label>Monthly SIP Amount (₹)</label>
+    <input type="number" id="sip" placeholder="e.g. 5000" min="100">
+  </div>
+  <div class="field">
+    <label>Expected Annual Return (%)</label>
+    <input type="number" id="rate" placeholder="e.g. 12" step="0.1" min="1" max="50" value="12">
+  </div>
+  <div class="field">
+    <label>Investment Duration (years)</label>
+    <input type="number" id="years" placeholder="e.g. 10" min="1" max="40">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate SIP Returns</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Estimated Corpus</div>
+      <div class="value" id="r_corpus">—</div>
+    </div>
+    <div class="result-row"><span class="result-label">Total Investment</span><span class="result-value" id="r_invested">—</span></div>
+    <div class="result-row"><span class="result-label">Estimated Returns</span><span class="result-value green" id="r_returns">—</span></div>
+    <div class="result-row"><span class="result-label">Wealth Gained</span><span class="result-value green" id="r_wealth_pct">—</span></div>
+    <div class="result-row"><span class="result-label">Total Months</span><span class="result-value blue" id="r_months">—</span></div>
+  </div>
+
+  <div class="tips">
+    <h3>SIP tips</h3>
+    <ul>
+      <li>₹5,000/month at 12% for 20 years → ~₹50 lakh corpus</li>
+      <li>Step-up SIP: increase by 10% each year → corpus doubles vs flat SIP</li>
+      <li>Index funds (Nifty 50, Nifty Next 50) have averaged 12–15% over 20 years</li>
+      <li>Start early — even ₹1,000/month from age 22 beats ₹5,000/month from 30</li>
+    </ul>
+  </div>
+  <div class="disclaimer">⚠️ Returns are estimates. Mutual fund investments are subject to market risk.</div>
+
+  <div class="affiliate">
+    <p>Start your SIP today — free account, ₹0 commission:</p>
+    <div class="affiliate-links">
+      <a class="affiliate-btn" href="https://groww.in/?utm_source=tradecalc" target="_blank" rel="noopener">Groww</a>
+      <a class="affiliate-btn" href="https://coin.zerodha.com/?utm_source=tradecalc" target="_blank" rel="noopener">Zerodha Coin</a>
+    </div>
+  </div>
+</div>
+</div>
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+function calculate() {
+  const sip = parseFloat(document.getElementById('sip').value);
+  const annualRate = parseFloat(document.getElementById('rate').value);
+  const years = parseFloat(document.getElementById('years').value);
+  if ([sip, annualRate, years].some(isNaN)) { alert('Fill all fields.'); return; }
+
+  const r = annualRate / 12 / 100;
+  const n = years * 12;
+  // FV of SIP = P × [(1+r)^n - 1] / r × (1+r)
+  const corpus = sip * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+  const invested = sip * n;
+  const returns = corpus - invested;
+  const fmt = v => '₹' + v.toLocaleString('en-IN', {maximumFractionDigits: 0});
+
+  document.getElementById('r_corpus').textContent = fmt(corpus);
+  document.getElementById('r_invested').textContent = fmt(invested);
+  document.getElementById('r_returns').textContent = fmt(returns);
+  document.getElementById('r_wealth_pct').textContent = '+' + (returns / invested * 100).toFixed(1) + '%';
+  document.getElementById('r_months').textContent = n + ' months';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

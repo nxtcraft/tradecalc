@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compound Interest Calculator — Grow Your Money | TradeCalc</title>
+  <meta name="description" content="Free compound interest calculator. See how your investment grows over time with daily, monthly, quarterly or yearly compounding.">
+  <link rel="canonical" href="https://tradecalc.in/compound/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">📈 Compound Interest Calculator</h1>
+  <p class="calc-desc">See how money grows over time when interest is reinvested. The longer you invest, the more powerful compounding becomes.</p>
+
+  <div class="field">
+    <label>Principal Amount (₹)</label>
+    <input type="number" id="principal" placeholder="e.g. 100000" min="0">
+  </div>
+  <div class="field">
+    <label>Annual Interest Rate (%)</label>
+    <input type="number" id="rate" placeholder="e.g. 12" step="0.1" min="0" max="100">
+  </div>
+  <div class="field">
+    <label>Time Period (years)</label>
+    <input type="number" id="years" placeholder="e.g. 10" min="1" max="50">
+  </div>
+  <div class="field">
+    <label>Compounding Frequency</label>
+    <select id="freq">
+      <option value="12">Monthly</option>
+      <option value="4">Quarterly</option>
+      <option value="2">Half-Yearly</option>
+      <option value="1" selected>Yearly</option>
+      <option value="365">Daily</option>
+    </select>
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate Growth</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Total Corpus</div>
+      <div class="value" id="r_corpus">—</div>
+    </div>
+    <div class="result-row"><span class="result-label">Principal Invested</span><span class="result-value" id="r_principal">—</span></div>
+    <div class="result-row"><span class="result-label">Interest Earned</span><span class="result-value green" id="r_interest">—</span></div>
+    <div class="result-row"><span class="result-label">Growth</span><span class="result-value green" id="r_growth">—</span></div>
+    <div class="result-row"><span class="result-label">Effective Annual Rate</span><span class="result-value blue" id="r_ear">—</span></div>
+  </div>
+
+  <div class="tips">
+    <h3>The power of compounding</h3>
+    <ul>
+      <li>₹1L at 12% for 10 years → ₹3.1L (more frequent compounding → more growth)</li>
+      <li>Rule of 72: divide 72 by rate to find years to double (72 ÷ 12 = 6 years)</li>
+      <li>Monthly compounding vs yearly: ~0.5% extra on a 12% rate</li>
+      <li>Start early — 10 years more can double your final corpus</li>
+    </ul>
+  </div>
+  <div class="disclaimer">⚠️ Educational tool only. Past returns do not guarantee future performance.</div>
+</div>
+</div>
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+function calculate() {
+  const p = parseFloat(document.getElementById('principal').value);
+  const r = parseFloat(document.getElementById('rate').value) / 100;
+  const t = parseFloat(document.getElementById('years').value);
+  const n = parseFloat(document.getElementById('freq').value);
+  if ([p, r, t, n].some(isNaN)) { alert('Fill all fields.'); return; }
+
+  const corpus = p * Math.pow(1 + r / n, n * t);
+  const interest = corpus - p;
+  const ear = (Math.pow(1 + r / n, n) - 1) * 100;
+  const fmt = v => '₹' + v.toLocaleString('en-IN', {maximumFractionDigits: 0});
+
+  document.getElementById('r_corpus').textContent = fmt(corpus);
+  document.getElementById('r_principal').textContent = fmt(p);
+  document.getElementById('r_interest').textContent = fmt(interest);
+  document.getElementById('r_growth').textContent = '+' + (interest / p * 100).toFixed(1) + '%';
+  document.getElementById('r_ear').textContent = ear.toFixed(2) + '% p.a.';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

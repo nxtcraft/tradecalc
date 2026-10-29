@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lot Size Calculator — Forex & Futures Position Sizing | TradeCalc</title>
+  <meta name="description" content="Calculate the right lot size for forex and futures trading based on your account size, risk % and stop loss in pips or points.">
+  <link rel="canonical" href="https://tradecalc.in/lot-size/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">📦 Lot Size Calculator</h1>
+  <p class="calc-desc">Find the correct lot size for forex and futures so your stop loss never exceeds your risk limit.</p>
+
+  <div class="field">
+    <label>Market</label>
+    <select id="market">
+      <option value="forex">Forex (standard lot = 100,000 units)</option>
+      <option value="nifty">Nifty 50 Futures (lot = 75)</option>
+      <option value="banknifty">Bank Nifty Futures (lot = 30)</option>
+      <option value="custom">Custom (enter lot size)</option>
+    </select>
+  </div>
+  <div class="field" id="custom_lot_field" style="display:none">
+    <label>Units per Lot</label>
+    <input type="number" id="custom_lot" placeholder="e.g. 100" min="1">
+  </div>
+  <div class="field">
+    <label>Account Size (₹ or $)</label>
+    <input type="number" id="account" placeholder="e.g. 500000" min="0">
+  </div>
+  <div class="field">
+    <label>Risk per Trade (%)</label>
+    <input type="number" id="risk_pct" placeholder="e.g. 1" step="0.1" min="0.1" max="100" value="1">
+  </div>
+  <div class="field">
+    <label>Stop Loss (pips / points)</label>
+    <input type="number" id="sl_pips" placeholder="e.g. 20" min="1">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate Lot Size</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Recommended Lots</div>
+      <div class="value" id="r_lots">—</div>
+    </div>
+    <div class="result-row"><span class="result-label">Risk Amount</span><span class="result-value red" id="r_risk_amt">—</span></div>
+    <div class="result-row"><span class="result-label">Units / Contracts</span><span class="result-value" id="r_units">—</span></div>
+    <div class="result-row"><span class="result-label">Value per Pip/Point</span><span class="result-value blue" id="r_pip_val">—</span></div>
+  </div>
+
+  <div class="tips">
+    <h3>How it works</h3>
+    <ul>
+      <li>Risk Amount = Account × Risk %</li>
+      <li>Lots = Risk Amount ÷ (Stop Loss × Pip Value per Lot)</li>
+      <li>Always round down to stay within risk limit</li>
+      <li>Forex standard pip value: $10 per lot for USD pairs</li>
+    </ul>
+  </div>
+  <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
+</div>
+</div>
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+document.getElementById('market').addEventListener('change', function() {
+  document.getElementById('custom_lot_field').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+function calculate() {
+  const market = document.getElementById('market').value;
+  const account = parseFloat(document.getElementById('account').value);
+  const riskPct = parseFloat(document.getElementById('risk_pct').value);
+  const slPips = parseFloat(document.getElementById('sl_pips').value);
+  if ([account, riskPct, slPips].some(isNaN)) { alert('Fill all fields.'); return; }
+
+  const riskAmt = account * riskPct / 100;
+  let pipValuePerLot, lotSize;
+  if (market === 'forex') { pipValuePerLot = 10; lotSize = 100000; }
+  else if (market === 'nifty') { pipValuePerLot = 75; lotSize = 75; }
+  else if (market === 'banknifty') { pipValuePerLot = 30; lotSize = 30; }
+  else {
+    lotSize = parseFloat(document.getElementById('custom_lot').value) || 1;
+    pipValuePerLot = lotSize;
+  }
+
+  const lots = Math.floor(riskAmt / (slPips * pipValuePerLot) * 100) / 100;
+  const units = Math.floor(lots * lotSize);
+  const pipVal = lots * pipValuePerLot;
+  const fmt = v => '₹' + v.toLocaleString('en-IN', {maximumFractionDigits: 2});
+
+  document.getElementById('r_lots').textContent = lots.toFixed(2) + ' lots';
+  document.getElementById('r_risk_amt').textContent = fmt(riskAmt);
+  document.getElementById('r_units').textContent = units.toLocaleString('en-IN');
+  document.getElementById('r_pip_val').textContent = fmt(pipVal) + ' / pip';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

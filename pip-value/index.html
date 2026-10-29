@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pip Value Calculator — Forex Pip Value in INR/USD | TradeCalc</title>
+  <meta name="description" content="Calculate pip value for any forex pair and lot size. Know exactly how much each pip is worth in your account currency before placing a trade.">
+  <link rel="canonical" href="https://tradecalc.in/pip-value/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">💱 Pip Value Calculator</h1>
+  <p class="calc-desc">Know the exact monetary value of one pip before entering a forex trade. Works for USD, EUR, GBP, JPY, and INR pairs.</p>
+
+  <div class="field">
+    <label>Forex Pair</label>
+    <select id="pair">
+      <option value="usd" data-pip="0.0001">EUR/USD, GBP/USD, AUD/USD (USD quote)</option>
+      <option value="jpy" data-pip="0.01">USD/JPY, EUR/JPY (JPY quote)</option>
+      <option value="usdinr" data-pip="0.0025">USD/INR (INR quote)</option>
+      <option value="custom">Custom pair</option>
+    </select>
+  </div>
+  <div class="field" id="custom_pip_field" style="display:none">
+    <label>Pip Size (e.g. 0.0001 for most pairs)</label>
+    <input type="number" id="custom_pip" placeholder="0.0001" step="0.0001" min="0">
+  </div>
+  <div class="field">
+    <label>Lot Size</label>
+    <select id="lot_type">
+      <option value="100000">Standard (100,000 units)</option>
+      <option value="10000">Mini (10,000 units)</option>
+      <option value="1000">Micro (1,000 units)</option>
+      <option value="custom">Custom</option>
+    </select>
+  </div>
+  <div class="field" id="custom_lot_field" style="display:none">
+    <label>Custom Lot Units</label>
+    <input type="number" id="custom_lot_units" placeholder="e.g. 50000" min="1">
+  </div>
+  <div class="field">
+    <label>Number of Lots</label>
+    <input type="number" id="num_lots" placeholder="e.g. 1" step="0.01" min="0.01" value="1">
+  </div>
+  <div class="field">
+    <label>Current Exchange Rate (pair price)</label>
+    <input type="number" id="rate" placeholder="e.g. 1.0850 or 83.50" step="0.0001" min="0">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate Pip Value</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Pip Value per Lot</div>
+      <div class="value" id="r_pip_val">—</div>
+    </div>
+    <div class="result-row"><span class="result-label">Total Pip Value (all lots)</span><span class="result-value green" id="r_total_pip">—</span></div>
+    <div class="result-row"><span class="result-label">10 pip move P&L</span><span class="result-value blue" id="r_10pip">—</span></div>
+    <div class="result-row"><span class="result-label">50 pip move P&L</span><span class="result-value blue" id="r_50pip">—</span></div>
+  </div>
+
+  <div class="tips">
+    <h3>What is a pip?</h3>
+    <ul>
+      <li>For EUR/USD: 1 pip = 0.0001 (4th decimal place)</li>
+      <li>For USD/JPY: 1 pip = 0.01 (2nd decimal place)</li>
+      <li>Standard lot (100K): 1 pip = $10 for USD-quoted pairs</li>
+      <li>Mini lot (10K): 1 pip = $1 for USD-quoted pairs</li>
+    </ul>
+  </div>
+  <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
+</div>
+</div>
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+document.getElementById('pair').addEventListener('change', function() {
+  document.getElementById('custom_pip_field').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+document.getElementById('lot_type').addEventListener('change', function() {
+  document.getElementById('custom_lot_field').style.display = this.value === 'custom' ? 'block' : 'none';
+});
+function calculate() {
+  const pairEl = document.getElementById('pair');
+  const pip = pairEl.value === 'custom'
+    ? parseFloat(document.getElementById('custom_pip').value)
+    : parseFloat(pairEl.selectedOptions[0].dataset.pip);
+  const lotTypeVal = document.getElementById('lot_type').value;
+  const lotUnits = lotTypeVal === 'custom'
+    ? parseFloat(document.getElementById('custom_lot_units').value)
+    : parseFloat(lotTypeVal);
+  const numLots = parseFloat(document.getElementById('num_lots').value);
+  const rate = parseFloat(document.getElementById('rate').value);
+
+  if ([pip, lotUnits, numLots, rate].some(isNaN)) { alert('Fill all fields.'); return; }
+
+  const pipValuePerLot = (pip / rate) * lotUnits;
+  const totalPipValue = pipValuePerLot * numLots;
+  const fmt = v => '$' + v.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 4});
+
+  document.getElementById('r_pip_val').textContent = fmt(pipValuePerLot);
+  document.getElementById('r_total_pip').textContent = fmt(totalPipValue);
+  document.getElementById('r_10pip').textContent = fmt(totalPipValue * 10);
+  document.getElementById('r_50pip').textContent = fmt(totalPipValue * 50);
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Reward Calculator — Is This Trade Worth Taking? | TradeCalc</title>
+  <meta name="description" content="Free risk-reward ratio calculator. Enter entry, target and stop loss to instantly see if a trade meets your minimum R:R threshold.">
+  <link rel="canonical" href="https://tradecalc.in/risk-reward/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav><a class="nav-logo" href="../index.html">Trade<span>Calc</span></a></nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">⚖️ Risk / Reward Calculator</h1>
+  <p class="calc-desc">See the risk-to-reward ratio of any trade before you enter. A ratio of 1:2 or better is the standard rule.</p>
+
+  <div class="field">
+    <label>Trade Type</label>
+    <select id="direction">
+      <option value="long">Long (Buy)</option>
+      <option value="short">Short (Sell)</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Entry Price (₹)</label>
+    <input type="number" id="entry" placeholder="e.g. 500" step="0.01" min="0">
+  </div>
+  <div class="field">
+    <label>Stop Loss Price (₹)</label>
+    <input type="number" id="sl" placeholder="e.g. 480" step="0.01" min="0">
+  </div>
+  <div class="field">
+    <label>Target Price (₹)</label>
+    <input type="number" id="target" placeholder="e.g. 540" step="0.01" min="0">
+  </div>
+  <div class="field">
+    <label>Number of Shares (optional)</label>
+    <input type="number" id="qty" placeholder="e.g. 100" min="1">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate R:R Ratio</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Risk : Reward</div>
+      <div class="value" id="r_rr" style="font-size:28px">—</div>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Risk (per share)</span>
+      <span class="result-value red" id="r_risk">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Reward (per share)</span>
+      <span class="result-value green" id="r_reward">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Total P&L if Target Hit</span>
+      <span class="result-value green" id="r_profit">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Total Loss if SL Hit</span>
+      <span class="result-value red" id="r_loss">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Min Win Rate Needed</span>
+      <span class="result-value blue" id="r_winrate">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Verdict</span>
+      <span class="result-value" id="r_verdict">—</span>
+    </div>
+  </div>
+
+  <div class="tips">
+    <h3>Rules of thumb</h3>
+    <ul>
+      <li>Minimum R:R of 1:2 is the standard — risk ₹1 to make ₹2</li>
+      <li>At 1:2 R:R, you only need to win 34% of trades to break even</li>
+      <li>At 1:3, you break even winning just 25% of trades</li>
+      <li>Always check R:R BEFORE entering a trade, not after</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
+</div>
+</div>
+
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+function fmt(n) { return '₹' + n.toLocaleString('en-IN', {maximumFractionDigits: 2}); }
+function calculate() {
+  const dir = document.getElementById('direction').value;
+  const entry = parseFloat(document.getElementById('entry').value);
+  const sl = parseFloat(document.getElementById('sl').value);
+  const target = parseFloat(document.getElementById('target').value);
+  const qty = parseFloat(document.getElementById('qty').value) || 1;
+
+  if ([entry, sl, target].some(isNaN)) { alert('Please fill entry, stop loss and target.'); return; }
+
+  let risk, reward;
+  if (dir === 'long') { risk = entry - sl; reward = target - entry; }
+  else { risk = sl - entry; reward = entry - target; }
+
+  if (risk <= 0 || reward <= 0) { alert('Check your prices — risk and reward must be positive.'); return; }
+
+  const rr = (reward / risk).toFixed(2);
+  const minWR = (1 / (1 + parseFloat(rr)) * 100).toFixed(1);
+  const verdict = parseFloat(rr) >= 2 ? '✅ Good trade' : parseFloat(rr) >= 1.5 ? '⚠️ Acceptable' : '❌ Poor R:R';
+
+  document.getElementById('r_rr').textContent = `1 : ${rr}`;
+  document.getElementById('r_risk').textContent = fmt(risk);
+  document.getElementById('r_reward').textContent = fmt(reward);
+  document.getElementById('r_profit').textContent = qty > 1 ? fmt(reward * qty) : '—';
+  document.getElementById('r_loss').textContent = qty > 1 ? fmt(risk * qty) : '—';
+  document.getElementById('r_winrate').textContent = minWR + '%';
+  document.getElementById('r_verdict').textContent = verdict;
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>

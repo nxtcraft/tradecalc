@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Position Size Calculator — How Many Shares to Buy | TradeCalc</title>
+  <meta name="description" content="Free position size calculator for stock traders. Enter your account size, risk %, entry price and stop loss to find the exact number of shares to buy.">
+  <link rel="canonical" href="https://tradecalc.in/position-size/">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">Trade<span>Calc</span></a>
+</nav>
+
+<div class="container">
+<div class="calc-wrap">
+  <a class="back-link" href="../index.html">← All Calculators</a>
+  <h1 class="calc-title">🎯 Position Size Calculator</h1>
+  <p class="calc-desc">Find the exact number of shares or units to buy so you never risk more than you can afford on a single trade.</p>
+
+  <div class="field">
+    <label>Account Size (₹)</label>
+    <input type="number" id="account" placeholder="e.g. 500000" min="0">
+  </div>
+  <div class="field">
+    <label>Risk per Trade (%)</label>
+    <input type="number" id="risk_pct" placeholder="e.g. 1" min="0.1" max="100" step="0.1" value="1">
+  </div>
+  <div class="field">
+    <label>Entry Price (₹)</label>
+    <input type="number" id="entry" placeholder="e.g. 2450" min="0" step="0.01">
+  </div>
+  <div class="field">
+    <label>Stop Loss Price (₹)</label>
+    <input type="number" id="stoploss" placeholder="e.g. 2380" min="0" step="0.01">
+  </div>
+
+  <button class="btn" onclick="calculate()">Calculate Position Size</button>
+
+  <div class="result-box" id="result">
+    <div class="result-main">
+      <div class="label">Shares to Buy</div>
+      <div class="value" id="r_shares">—</div>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Capital Required</span>
+      <span class="result-value blue" id="r_capital">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Amount at Risk (₹)</span>
+      <span class="result-value red" id="r_risk_amt">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Risk per Share</span>
+      <span class="result-value" id="r_risk_share">—</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">% of Account Used</span>
+      <span class="result-value" id="r_pct_used">—</span>
+    </div>
+  </div>
+
+  <div class="tips">
+    <h3>How it works</h3>
+    <ul>
+      <li>Risk Amount = Account Size × Risk %</li>
+      <li>Risk per Share = Entry Price − Stop Loss</li>
+      <li>Shares = Risk Amount ÷ Risk per Share</li>
+      <li>Most professional traders risk 1–2% per trade maximum</li>
+      <li>Never risk more than 5% of your account on a single trade</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    ⚠️ This is a mathematical tool only. It does not constitute financial advice. Always do your own research before trading.
+  </div>
+
+  <div class="affiliate">
+    <p>Ready to trade? Open a free demat account with a discount broker:</p>
+    <div class="affiliate-links">
+      <a class="affiliate-btn" href="https://zerodha.com/?utm_source=tradecalc" target="_blank" rel="noopener">Zerodha</a>
+      <a class="affiliate-btn" href="https://upstox.com/?utm_source=tradecalc" target="_blank" rel="noopener">Upstox</a>
+      <a class="affiliate-btn" href="https://groww.in/?utm_source=tradecalc" target="_blank" rel="noopener">Groww</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<script>
+function fmt(n) { return '₹' + n.toLocaleString('en-IN', {maximumFractionDigits: 2}); }
+function calculate() {
+  const account = parseFloat(document.getElementById('account').value);
+  const riskPct = parseFloat(document.getElementById('risk_pct').value);
+  const entry = parseFloat(document.getElementById('entry').value);
+  const sl = parseFloat(document.getElementById('stoploss').value);
+
+  if ([account, riskPct, entry, sl].some(isNaN) || entry <= sl) {
+    alert('Please fill all fields. Entry must be above stop loss.');
+    return;
+  }
+
+  const riskAmt = account * riskPct / 100;
+  const riskPerShare = entry - sl;
+  const shares = Math.floor(riskAmt / riskPerShare);
+  const capital = shares * entry;
+
+  document.getElementById('r_shares').textContent = shares.toLocaleString('en-IN');
+  document.getElementById('r_capital').textContent = fmt(capital);
+  document.getElementById('r_risk_amt').textContent = fmt(riskAmt);
+  document.getElementById('r_risk_share').textContent = fmt(riskPerShare);
+  document.getElementById('r_pct_used').textContent = (capital / account * 100).toFixed(1) + '%';
+  document.getElementById('result').classList.add('show');
+}
+</script>
+</body>
+</html>
