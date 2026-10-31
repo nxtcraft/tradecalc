@@ -6,6 +6,40 @@
   <title>Risk Reward Calculator — Is This Trade Worth Taking? | TradeCalc</title>
   <meta name="description" content="Free risk-reward ratio calculator. Enter entry, target and stop loss to instantly see if a trade meets your minimum R:R threshold.">
   <link rel="canonical" href="https://tradecalc.in/risk-reward/">
+  <meta property="og:title" content="Risk Reward Calculator — Is This Trade Worth Taking?">
+  <meta property="og:description" content="Free risk-reward ratio calculator. Enter entry, target and stop loss to instantly see if a trade meets your minimum R:R threshold.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Risk Reward Calculator | TradeCalc">
+  <meta name="twitter:description" content="Calculate R:R ratio, minimum win rate needed, and total P&L before entering any trade. Free, instant.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a good risk-reward ratio in trading?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A minimum risk-reward ratio of 1:2 is the standard rule — risk ₹1 to make ₹2. At 1:2 R:R, you only need to win 34% of your trades to break even. Many professional traders use 1:3 or better, which means you profit even if you lose 75% of your trades." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate risk-reward ratio?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Risk = Entry Price − Stop Loss. Reward = Target Price − Entry Price. R:R Ratio = Reward ÷ Risk. Example: Entry ₹500, Stop Loss ₹480, Target ₹560. Risk = ₹20, Reward = ₹60, R:R = 60/20 = 1:3." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum win rate needed at 1:2 risk-reward?",
+        "acceptedAnswer": { "@type": "Answer", "text": "At a 1:2 risk-reward ratio, the breakeven win rate is 1/(1+2) = 33.3%. That means you profit even if you lose 2 out of every 3 trades, as long as your winning trades average twice the size of your losing trades." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I always use 1:2 risk-reward for every trade?",
+        "acceptedAnswer": { "@type": "Answer", "text": "1:2 is the minimum, not the only rule. Depending on your strategy's win rate, a lower R:R can be profitable. A scalping strategy with a 70% win rate can work at 1:1 R:R. The key is that your average winner must outpace your average loser when combined with your win rate." }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -88,7 +122,44 @@
 </div>
 </div>
 
-<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+<div class="container">
+  <div class="seo-section">
+    <h2>Risk-Reward Ratio — Complete Guide for Traders</h2>
+    <p>The risk-reward ratio (R:R) measures how much potential profit you get for every rupee you risk. It is the single most important number to calculate before entering any trade — more important than the win rate alone.</p>
+
+    <h3>How to calculate risk-reward ratio</h3>
+    <p>For a long trade: <strong>Risk = Entry − Stop Loss</strong>. <strong>Reward = Target − Entry</strong>. <strong>R:R = Reward ÷ Risk</strong>.</p>
+    <p>Example: Entry ₹500, SL ₹480, Target ₹560 → Risk = ₹20, Reward = ₹60 → R:R = 1:3. This is a good trade.</p>
+    <p>For a short trade: Risk = Stop Loss − Entry, Reward = Entry − Target.</p>
+
+    <h3>Why 1:2 is the minimum standard</h3>
+    <p>At a 1:2 risk-reward ratio, you break even at a win rate of just 33.3%. That means you can lose 2 out of every 3 trades and still not lose money — as long as your winners are twice your losers. Most professional traders set 1:2 as the minimum before considering any trade.</p>
+
+    <h3>R:R vs win rate — the real relationship</h3>
+    <ul>
+      <li><strong>1:1 R:R</strong> — need 50%+ win rate to profit</li>
+      <li><strong>1:2 R:R</strong> — need only 34%+ win rate to profit</li>
+      <li><strong>1:3 R:R</strong> — need only 25%+ win rate to profit</li>
+      <li><strong>1:4 R:R</strong> — need only 20%+ win rate to profit</li>
+    </ul>
+
+    <h3>Common mistakes with risk-reward</h3>
+    <ul>
+      <li>Moving the stop loss after entry — this changes your actual R:R mid-trade</li>
+      <li>Setting targets at round numbers without checking if support/resistance confirms</li>
+      <li>Calculating R:R after entering, not before</li>
+      <li>Ignoring charges — brokerage eats into small reward trades</li>
+    </ul>
+
+    <div style="margin-top:18px; font-size:12px; color:#64748b;">
+      Also useful: <a href="../position-size/" style="color:var(--accent);">Position Size Calculator</a> ·
+      <a href="../brokerage/" style="color:var(--accent);">Brokerage Calculator</a> ·
+      <a href="../profit-loss/" style="color:var(--accent);">P&amp;L Calculator</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 TradeCalc — Numbers are for educational purposes only.</p></footer>
 
 <script>
 function fmt(n) { return '₹' + n.toLocaleString('en-IN', {maximumFractionDigits: 2}); }

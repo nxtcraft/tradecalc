@@ -6,6 +6,40 @@
   <title>Profit & Loss Calculator — Stock Trade P&L | TradeCalc</title>
   <meta name="description" content="Calculate profit or loss on a stock trade. Enter buy price, sell price and quantity to get gross P&L, P&L %, and breakeven price.">
   <link rel="canonical" href="https://tradecalc.in/profit-loss/">
+  <meta property="og:title" content="Profit & Loss Calculator — Stock Trade P&L | TradeCalc">
+  <meta property="og:description" content="Calculate profit or loss on any stock trade. Enter buy price, sell price and quantity to get gross P&L, P&L % and net profit after charges.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="P&L Calculator — Stock Trade Profit & Loss | TradeCalc">
+  <meta name="twitter:description" content="Free stock trade P&L calculator. Gross profit, net profit after charges, P&L % and per-share breakdown. Instant result.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you calculate profit and loss on a stock trade?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Gross P&L = (Sell Price − Buy Price) × Quantity. Net P&L = Gross P&L − Brokerage & Charges. P&L % = Net P&L ÷ (Buy Price × Quantity) × 100. Example: Bought 50 shares at ₹1,200, sold at ₹1,350. Gross P&L = (1350−1200) × 50 = ₹7,500. If charges are ₹100, Net P&L = ₹7,400." }
+      },
+      {
+        "@type": "Question",
+        "name": "What charges reduce stock trading profit in India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For equity delivery trades in India: STT (Securities Transaction Tax) 0.1% on buy and sell, SEBI charges ₹10 per crore, NSE/BSE exchange charges ~0.00335%, GST 18% on brokerage + charges, and stamp duty 0.015% on buy. Most brokers like Zerodha charge ₹0 for delivery brokerage. For intraday: flat ₹20 or 0.03% per order at most discount brokers, plus STT 0.025% on sell side only." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between realized and unrealized P&L?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Unrealized P&L (also called open P&L or mark-to-market) is profit or loss on a position you are still holding. It changes as the market price moves. Realized P&L is profit or loss from positions you have already closed by selling. Only realized P&L is taxable." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is stock trading profit taxed in India?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Equity delivery trades held more than 12 months: Long Term Capital Gains (LTCG) at 10% on gains above ₹1 lakh per year. Held less than 12 months: Short Term Capital Gains (STCG) at 15%. Intraday trades are treated as speculative business income — taxed at your income tax slab rate." }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -60,7 +94,43 @@
   <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
 </div>
 </div>
-<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<div class="container">
+  <div class="seo-section">
+    <h2>Profit & Loss Calculator — Stock Trading P&L Guide</h2>
+    <p>Calculating your exact profit or loss on a stock trade requires more than just subtracting buy from sell price. Brokerage charges, STT, exchange fees and GST all eat into your gross profit. This calculator gives you the complete net P&L picture.</p>
+
+    <h3>P&L formula for stock trades</h3>
+    <ul>
+      <li><strong>Gross P&L</strong> = (Sell Price − Buy Price) × Quantity</li>
+      <li><strong>Net P&L</strong> = Gross P&L − Total Charges</li>
+      <li><strong>P&L %</strong> = Net P&L ÷ (Buy Price × Quantity) × 100</li>
+      <li><strong>Breakeven price</strong> = Buy Price + (Total Charges ÷ Quantity)</li>
+    </ul>
+
+    <h3>What charges reduce your profit?</h3>
+    <p>For equity delivery in India, typical charges on a ₹1 lakh trade include STT (0.1% on buy + sell = ₹200), exchange charges (~₹3), SEBI charges (negligible), GST 18% on brokerage, and stamp duty 0.015% on buy side. At zero-brokerage brokers like Zerodha, total charges on ₹1 lakh delivery round trip ≈ ₹250–300.</p>
+    <p>For intraday, the charge profile changes: STT drops to 0.025% on sell only, but brokerage applies (flat ₹20 at most discount brokers). Use the <a href="../brokerage/" style="color:var(--accent);">Brokerage Calculator</a> for exact breakdowns.</p>
+
+    <h3>Realized vs unrealized P&L</h3>
+    <p>Unrealized P&L is the profit/loss on positions you still hold — it changes every second as the market moves. Realized P&L is from closed trades. <strong>Only realized P&L is taxable</strong>. If a stock shows unrealized profit, don't count it until you actually sell.</p>
+
+    <h3>Tax on stock trading profits in India (2025)</h3>
+    <ul>
+      <li><strong>LTCG (held 12+ months)</strong>: 10% on gains above ₹1 lakh/year</li>
+      <li><strong>STCG (held under 12 months)</strong>: 15%</li>
+      <li><strong>Intraday / F&O</strong>: Treated as business income — taxed at your income slab rate</li>
+    </ul>
+
+    <div style="margin-top:18px; font-size:12px; color:#64748b;">
+      Also useful: <a href="../brokerage/" style="color:var(--accent);">Brokerage Calculator</a> ·
+      <a href="../risk-reward/" style="color:var(--accent);">Risk-Reward Calculator</a> ·
+      <a href="../position-size/" style="color:var(--accent);">Position Size Calculator</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 TradeCalc — Numbers are for educational purposes only.</p></footer>
 
 <script>
 function calculate() {

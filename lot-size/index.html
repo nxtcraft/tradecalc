@@ -6,6 +6,40 @@
   <title>Lot Size Calculator — Forex & Futures Position Sizing | TradeCalc</title>
   <meta name="description" content="Calculate the right lot size for forex and futures trading based on your account size, risk % and stop loss in pips or points.">
   <link rel="canonical" href="https://tradecalc.in/lot-size/">
+  <meta property="og:title" content="Lot Size Calculator — Forex & Futures Position Sizing | TradeCalc">
+  <meta property="og:description" content="Calculate the right lot size for forex and futures. Enter account size, risk % and stop loss to get the exact number of lots to trade.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lot Size Calculator — Forex & Futures | TradeCalc">
+  <meta name="twitter:description" content="Find the correct lot size for Nifty, Bank Nifty or forex so your stop loss never exceeds your risk limit. Free, instant result.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a lot size in futures trading?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A lot size is the fixed number of units in one futures contract. Nifty 50 futures have a lot size of 75 units. Bank Nifty lot size is 30 units. Forex standard lots are 100,000 currency units, mini lots are 10,000, and micro lots are 1,000. You cannot trade a fraction of a lot — you must trade in whole multiples." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate lot size for Nifty futures?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Formula: Lots = Risk Amount ÷ (Stop Loss Points × Lot Size). Risk Amount = Account Size × Risk %. Example: Account ₹5 lakh, risk 1% = ₹5,000. SL = 30 points, Nifty lot = 75. Lots = 5000 ÷ (30 × 75) = 5000 ÷ 2250 = 2.2 lots → round down to 2 lots." }
+      },
+      {
+        "@type": "Question",
+        "name": "What percentage of capital should I risk per trade?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The standard rule is 1–2% of your total trading capital per trade. At 1%, you can have 10 consecutive losing trades and still retain 90% of your capital. Professional traders rarely risk more than 2% per trade. Beginners are advised to start with 0.5–1% per trade until their strategy is proven profitable." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the current Nifty 50 lot size?",
+        "acceptedAnswer": { "@type": "Answer", "text": "As of 2024, the Nifty 50 futures lot size is 75 units per contract. Bank Nifty lot size is 30 units. Fin Nifty lot size is 125 units. Lot sizes are revised periodically by NSE based on the underlying price — always verify the current lot size on the NSE website before trading." }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -67,7 +101,48 @@
   <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
 </div>
 </div>
-<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<div class="container">
+  <div class="seo-section">
+    <h2>Lot Size Calculator — Futures & Forex Position Sizing Guide</h2>
+    <p>Calculating the correct lot size is the foundation of risk management in futures and forex trading. Trading too large means a single bad trade can wipe out weeks of gains. Too small, and you leave money on the table. The right lot size is derived mathematically from your account size and risk tolerance.</p>
+
+    <h3>Lot size formula</h3>
+    <p><strong>Lots = Risk Amount ÷ (Stop Loss × Pip/Point Value per Lot)</strong></p>
+    <p>Where: Risk Amount = Account Size × Risk %</p>
+    <p>Always round <strong>down</strong> to the nearest whole lot — never up — to stay within your risk limit.</p>
+
+    <h3>Example: Nifty 50 futures lot size calculation</h3>
+    <p>Account: ₹5,00,000 · Risk per trade: 1% = ₹5,000 · Stop loss: 40 points · Nifty lot size: 75</p>
+    <p>Lots = ₹5,000 ÷ (40 × 75) = 5,000 ÷ 3,000 = <strong>1.67 → round down to 1 lot</strong></p>
+    <p>With 1 lot, a 40-point adverse move costs 40 × 75 = ₹3,000 — exactly 0.6% of account, within our 1% limit.</p>
+
+    <h3>Indian futures lot sizes (2024–25)</h3>
+    <ul>
+      <li><strong>Nifty 50</strong>: 75 units per lot</li>
+      <li><strong>Bank Nifty</strong>: 30 units per lot</li>
+      <li><strong>Fin Nifty</strong>: 125 units per lot</li>
+      <li><strong>Sensex</strong>: 20 units per lot (BSE)</li>
+    </ul>
+    <p>Lot sizes change periodically — verify on NSE/BSE before trading.</p>
+
+    <h3>Risk per trade — the 1% rule</h3>
+    <ul>
+      <li>Risk 1%: 10 consecutive losses still leaves 90% capital intact</li>
+      <li>Risk 2%: common for experienced traders with proven systems</li>
+      <li>Risk 5%+: extremely aggressive — 14 consecutive losses = 50% drawdown</li>
+      <li>Beginners: start at 0.5% until your system is profitable on paper first</li>
+    </ul>
+
+    <div style="margin-top:18px; font-size:12px; color:#64748b;">
+      Also useful: <a href="../position-size/" style="color:var(--accent);">Position Size Calculator</a> ·
+      <a href="../risk-reward/" style="color:var(--accent);">Risk-Reward Calculator</a> ·
+      <a href="../pip-value/" style="color:var(--accent);">Pip Value Calculator</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 TradeCalc — Numbers are for educational purposes only.</p></footer>
 
 <script>
 document.getElementById('market').addEventListener('change', function() {

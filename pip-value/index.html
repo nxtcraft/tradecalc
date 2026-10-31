@@ -6,6 +6,40 @@
   <title>Pip Value Calculator — Forex Pip Value in INR/USD | TradeCalc</title>
   <meta name="description" content="Calculate pip value for any forex pair and lot size. Know exactly how much each pip is worth in your account currency before placing a trade.">
   <link rel="canonical" href="https://tradecalc.in/pip-value/">
+  <meta property="og:title" content="Pip Value Calculator — Forex Pip Value in USD & INR | TradeCalc">
+  <meta property="og:description" content="Calculate the exact monetary value of one pip for any forex pair and lot size. Works for EUR/USD, GBP/USD, USD/JPY, USD/INR and more.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pip Value Calculator — Forex | TradeCalc">
+  <meta name="twitter:description" content="Know exactly how much each pip is worth in your account currency before placing a forex trade. Supports standard, mini and micro lots.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a pip in forex trading?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A pip (percentage in point) is the smallest standard price movement in a forex pair. For most pairs like EUR/USD and GBP/USD, one pip = 0.0001 (the 4th decimal place). For JPY pairs like USD/JPY, one pip = 0.01 (the 2nd decimal place). Some brokers quote 5 decimal places — the 5th decimal is called a pipette (1/10th of a pip)." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate pip value?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pip Value = (Pip Size / Exchange Rate) × Lot Size. For EUR/USD at 1.0850 with a standard lot (100,000): Pip Value = (0.0001 / 1.0850) × 100,000 = $9.22 per pip. For USD/INR at 83.50 with a standard lot: Pip Value = (0.0025 / 83.50) × 100,000 = ₹2.99 per pip." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the pip value for EUR/USD standard lot?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For EUR/USD, the pip value for a standard lot (100,000 units) is approximately $10 per pip (since USD is the quote currency, pip value is fixed in USD). For a mini lot (10,000 units), it is $1 per pip. For a micro lot (1,000 units), it is $0.10 per pip." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does pip value matter in risk management?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pip value tells you how much money you gain or lose per pip move. If your stop loss is 20 pips and each pip is worth $10 (standard EUR/USD lot), one losing trade costs $200. Knowing pip value lets you calculate exact position sizes to keep each trade's risk within your 1–2% account risk rule." }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -76,7 +110,42 @@
   <div class="disclaimer">⚠️ Educational tool only. Not financial advice.</div>
 </div>
 </div>
-<footer><p>© 2025 TradeCalc — Numbers are for educational purposes only.</p></footer>
+
+<div class="container">
+  <div class="seo-section">
+    <h2>Pip Value Calculator — Complete Forex Guide</h2>
+    <p>Before placing any forex trade, you need to know how much each pip is worth in your account currency. Without this, you cannot calculate position size or true risk. Pip value varies with pair, lot size, and current exchange rate.</p>
+
+    <h3>What is a pip?</h3>
+    <p>A pip is the smallest standard unit of price movement in forex. For most major pairs (EUR/USD, GBP/USD, AUD/USD), one pip = <strong>0.0001</strong> — the 4th decimal place. For JPY pairs (USD/JPY, EUR/JPY), one pip = <strong>0.01</strong> — the 2nd decimal place. Some brokers quote to 5 decimal places; the 5th decimal (0.00001) is a pipette, worth 1/10th of a pip.</p>
+
+    <h3>Pip value formula</h3>
+    <p><strong>Pip Value = (Pip Size ÷ Exchange Rate) × Lot Size</strong></p>
+    <p>Example — EUR/USD at 1.0850, standard lot (100,000 units):</p>
+    <p>Pip Value = (0.0001 ÷ 1.0850) × 100,000 = <strong>$9.22 per pip</strong></p>
+    <p>For USD-quoted pairs, pip value in USD is simply: Pip Size × Lot Size = 0.0001 × 100,000 = <strong>$10 exactly</strong>.</p>
+
+    <h3>Pip values — quick reference</h3>
+    <ul>
+      <li><strong>EUR/USD standard lot</strong>: ~$10 per pip</li>
+      <li><strong>EUR/USD mini lot (10,000)</strong>: ~$1 per pip</li>
+      <li><strong>EUR/USD micro lot (1,000)</strong>: ~$0.10 per pip</li>
+      <li><strong>USD/JPY standard lot</strong>: ~$9.20 per pip (varies with rate)</li>
+      <li><strong>USD/INR standard lot</strong>: ~₹2.99 per pip (at ₹83.50)</li>
+    </ul>
+
+    <h3>How pip value connects to risk management</h3>
+    <p>If your stop loss is 30 pips on EUR/USD with a standard lot ($10/pip), you risk $300 per trade. To keep risk at 1% of a $30,000 account ($300 max), you can use exactly 1 standard lot. For a $10,000 account (1% = $100 max), your lot size = $100 ÷ (30 × $10) = 0.33 lots → use 0.3 mini lots.</p>
+
+    <div style="margin-top:18px; font-size:12px; color:#64748b;">
+      Also useful: <a href="../lot-size/" style="color:var(--accent);">Lot Size Calculator</a> ·
+      <a href="../position-size/" style="color:var(--accent);">Position Size Calculator</a> ·
+      <a href="../risk-reward/" style="color:var(--accent);">Risk-Reward Calculator</a>
+    </div>
+  </div>
+</div>
+
+<footer><p>© 2026 TradeCalc — Numbers are for educational purposes only.</p></footer>
 
 <script>
 document.getElementById('pair').addEventListener('change', function() {
