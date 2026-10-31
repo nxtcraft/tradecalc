@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tradecalc.in/</loc><priority>1.0</priority></url>
-  <url><loc>https://tradecalc.in/position-size/</loc><priority>0.9</priority></url>
-  <url><loc>https://tradecalc.in/risk-reward/</loc><priority>0.9</priority></url>
-  <url><loc>https://tradecalc.in/brokerage/</loc><priority>0.9</priority></url>
-  <url><loc>https://tradecalc.in/profit-loss/</loc><priority>0.8</priority></url>
-  <url><loc>https://tradecalc.in/lot-size/</loc><priority>0.8</priority></url>
-  <url><loc>https://tradecalc.in/pip-value/</loc><priority>0.8</priority></url>
-  <url><loc>https://tradecalc.in/compound/</loc><priority>0.8</priority></url>
-  <url><loc>https://tradecalc.in/sip/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/</loc><priority>1.0</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/position-size/</loc><priority>0.9</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/risk-reward/</loc><priority>0.9</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/brokerage/</loc><priority>0.9</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/profit-loss/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/lot-size/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/pip-value/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/compound/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/sip/</loc><priority>0.8</priority></url>
+  <url><loc>https://nxtcraft.github.io/tradecalc/guide/</loc><priority>0.7</priority></url>
 </urlset>
