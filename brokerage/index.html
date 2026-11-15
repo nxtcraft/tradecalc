@@ -132,6 +132,10 @@ function fmt(n, red) {
   return n < 0 ? '-' + s : s;
 }
 
+function updateSegment() {
+  if (['buy_price', 'sell_price', 'qty'].every(id => document.getElementById(id).value !== '')) calculate();
+}
+
 function calculate() {
   const segment = document.getElementById('segment').value;
   const buyP = parseFloat(document.getElementById('buy_price').value);
