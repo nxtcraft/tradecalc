@@ -64,7 +64,7 @@
     <div class="result-row"><span class="result-label">Exchange Charges</span><span class="result-value" id="r_exchange">—</span></div>
     <div class="result-row"><span class="result-label">SEBI Charges</span><span class="result-value" id="r_sebi">—</span></div>
     <div class="result-row"><span class="result-label">Stamp Duty</span><span class="result-value" id="r_stamp">—</span></div>
-    <div class="result-row"><span class="result-label">GST (18% on brokerage + exchange)</span><span class="result-value" id="r_gst">—</span></div>
+    <div class="result-row"><span class="result-label">GST (18% on brokerage + exchange + SEBI)</span><span class="result-value" id="r_gst">—</span></div>
     <div class="result-row"><span class="result-label">Total Charges</span><span class="result-value red" id="r_total_charges">—</span></div>
     <div class="result-row"><span class="result-label">Breakeven Move</span><span class="result-value blue" id="r_breakeven">—</span></div>
   </div>
@@ -73,14 +73,14 @@
     <h3>Charge structure (Zerodha / flat fee model)</h3>
     <ul>
       <li>Brokerage: ₹0 for delivery, ₹20 or 0.03% (whichever lower) for intraday & F&O</li>
-      <li>STT: 0.1% on delivery (buy+sell), 0.025% on intraday sell, 0.0125% on futures sell</li>
-      <li>Exchange: 0.00335% NSE equity, 0.002% futures, 0.053% options</li>
+      <li>STT: 0.1% on delivery (buy+sell), 0.025% on intraday sell, 0.05% on futures sell, 0.15% on options premium sell (from 1 April 2026)</li>
+      <li>Exchange (NSE): 0.00307% equity, 0.00183% futures, 0.03553% options premium</li>
       <li>SEBI: ₹10 per crore turnover</li>
-      <li>Stamp Duty: 0.015% on buy for delivery, 0.003% intraday</li>
+      <li>Stamp Duty (buy side): 0.015% delivery, 0.003% intraday & options, 0.002% futures</li>
     </ul>
   </div>
 
-  <div class="disclaimer">⚠️ Charges are approximate based on Zerodha model as of 2025. Verify with your broker.</div>
+  <div class="disclaimer">⚠️ Charges are approximate based on the Zerodha model and rates in force from April 2026. Verify with your broker.</div>
 
   <!-- SEO CONTENT -->
   <div style="margin-top:36px;color:var(--muted);font-size:14px;line-height:1.8">
@@ -89,7 +89,7 @@
     <ul style="padding-left:20px;margin-top:10px;display:flex;flex-direction:column;gap:6px">
       <li><strong>Brokerage</strong> — ₹0 for delivery (Zerodha), ₹20 per order for intraday/F&O</li>
       <li><strong>STT (Securities Transaction Tax)</strong> — Government tax: 0.1% on delivery, 0.025% on intraday sell side</li>
-      <li><strong>Exchange Charges</strong> — NSE/BSE fee: ~0.00335% of turnover for equity</li>
+      <li><strong>Exchange Charges</strong> — NSE fee: ~0.00307% of turnover for equity</li>
       <li><strong>SEBI Charges</strong> — Regulatory fee: ₹10 per crore of turnover</li>
       <li><strong>Stamp Duty</strong> — State-level tax on buy side: 0.015% for delivery, 0.003% for intraday</li>
       <li><strong>GST</strong> — 18% on brokerage + exchange charges</li>
@@ -97,7 +97,7 @@
 
     <h2 style="font-size:18px;color:var(--text);margin:24px 0 12px">Frequently Asked Questions</h2>
     <div style="display:flex;flex-direction:column;gap:16px">
-      <div><strong style="color:var(--text)">What is STT in stock trading?</strong><p style="margin-top:4px">Securities Transaction Tax (STT) is a government tax levied on stock and derivative trades. For equity delivery, it is 0.1% on both buy and sell. For intraday, it is 0.025% on the sell side only. For F&O futures, it is 0.0125% on sell.</p></div>
+      <div><strong style="color:var(--text)">What is STT in stock trading?</strong><p style="margin-top:4px">Securities Transaction Tax (STT) is a government tax levied on stock and derivative trades. For equity delivery, it is 0.1% on both buy and sell. For intraday, it is 0.025% on the sell side only. For F&O futures it is 0.05% on sell, and for options 0.15% of the premium on sell (from 1 April 2026, Budget 2026).</p></div>
       <div><strong style="color:var(--text)">How much does Zerodha charge per trade?</strong><p style="margin-top:4px">Zerodha charges ₹0 brokerage for equity delivery trades. For intraday equity and F&O, it charges ₹20 per executed order or 0.03% whichever is lower. Other charges (STT, GST, exchange) apply on top.</p></div>
       <div><strong style="color:var(--text)">What is the breakeven move in a trade?</strong><p style="margin-top:4px">The breakeven move is how much the stock price must move in your favour just to cover all charges. For intraday trades, this is typically ₹0.5 to ₹2 per share depending on the stock price and lot size.</p></div>
     </div>
@@ -159,22 +159,23 @@ function calculate() {
   let stt = 0;
   if (segment === 'eq_delivery') stt = turnover * 0.001;
   else if (segment === 'eq_intraday') stt = sellVal * 0.00025;
-  else if (segment === 'fo_futures') stt = sellVal * 0.0000125;
-  else stt = sellVal * 0.000625; // options sell side
+  else if (segment === 'fo_futures') stt = sellVal * 0.0005;   // 0.05% sell side (from 1 Apr 2026)
+  else stt = sellVal * 0.0015; // options: 0.15% of premium, sell side (from 1 Apr 2026)
 
   // Exchange charges
   let exchange = 0;
-  if (segment === 'eq_delivery' || segment === 'eq_intraday') exchange = turnover * 0.0000335;
-  else if (segment === 'fo_futures') exchange = turnover * 0.00002;
-  else exchange = turnover * 0.00053;
+  // NSE transaction charges incl. IPF (circular NSE/FA/73061, from 1 Mar 2026)
+  if (segment === 'eq_delivery' || segment === 'eq_intraday') exchange = turnover * 0.0000307;
+  else if (segment === 'fo_futures') exchange = turnover * 0.0000183;
+  else exchange = turnover * 0.0003553;
 
   const sebi = turnover * 0.000001; // ₹10/crore
   let stamp = 0;
   if (segment === 'eq_delivery') stamp = buyVal * 0.00015;
-  else if (segment === 'eq_intraday') stamp = buyVal * 0.00003;
-  else stamp = buyVal * 0.00003;
+  else if (segment === 'fo_futures') stamp = buyVal * 0.00002;
+  else stamp = buyVal * 0.00003; // intraday & options
 
-  const gst = (brokerage + exchange) * 0.18;
+  const gst = (brokerage + exchange + sebi) * 0.18;
   const totalCharges = brokerage + stt + exchange + sebi + stamp + gst;
   const net = gross - totalCharges;
   const breakeven = (totalCharges / qty).toFixed(2);
